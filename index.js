@@ -49,10 +49,10 @@ function nepaliMonthLength(ny, nm) {
   @return Julian Day number
 */
 function n2d(ny, nm, nd) {
-  i=ly=nepaliCalendarData.startYear;
-  d=nepaliCalendarData.startJulianDay-1;
-  ly=nepaliCalendarData.leapYears[0];
-  for(j=1;j<nepaliCalendarData.leapYears.length;j++){
+  let i=nepaliCalendarData.startYear;
+  let d=nepaliCalendarData.startJulianDay-1;
+  let ly=nepaliCalendarData.leapYears[0];
+  for(let j=1;j<nepaliCalendarData.leapYears.length;j++){
     if(ly>ny) break;
     d+=(ly-i)*365;
     d+=366;
@@ -77,10 +77,11 @@ function n2d(ny, nm, nd) {
 */
 function d2n(jdn) {
   jdn=jdn-nepaliCalendarData.startJulianDay-1+2;
-  ny=ly=nepaliCalendarData.startYear;
-  d=td=jdn;
+  let ny=nepaliCalendarData.startYear;
+  let td=jdn;
+  let d=td;
   try{
-    for(i=0;i<nepaliCalendarData.leapYears.length;i++){
+    for(let i=0;i<nepaliCalendarData.leapYears.length;i++){
       td-= (nepaliCalendarData.leapYears[i]-ny)*365;
       td-= 366;
       if(td<0) break;
@@ -91,13 +92,14 @@ function d2n(jdn) {
       d-=365;
       ny++;
     }
+    let nm;
     for(nm=1;nm<12;nm++){
       if(d>nepaliCalendarData[ny][nm-1])
         d-=nepaliCalendarData[ny][nm-1];
       else
         break;
     }
-    nd=d;
+    let nd=d;
 
     return  { ny: ny
             , nm: nm
